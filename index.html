@@ -59,7 +59,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[1.86234893822472,103.08254237411118],[1.8647185796913779,103.08559634760283]]);
+        }).fitBounds([[1.8623573400929134,103.08227523915019],[1.864007700301982,103.08538870896385]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -188,7 +188,7 @@
                 case 'First Floor':
                     return {
                 pane: 'pane_Laboratory_2',
-                radius: 4.0,
+                radius: 9.200000000000001,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -204,7 +204,7 @@
                 case 'Ground Floor':
                     return {
                 pane: 'pane_Laboratory_2',
-                radius: 4.0,
+                radius: 9.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -220,7 +220,7 @@
                 default:
                     return {
                 pane: 'pane_Laboratory_2',
-                radius: 4.0,
+                radius: 9.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -229,7 +229,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,127,0,1.0)',
+                fillColor: 'rgba(255,240,0,1.0)',
                 interactive: true,
             }
                     break;
