@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         html, body, #map {
@@ -38,7 +37,6 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="js/leaflet-search.js"></script>
         <script src="data/Laboratory_2.js"></script>
         <script>
         var highlightLayer;
@@ -55,11 +53,10 @@
                 fillOpacity: 1
               });
             }
-            highlightLayer.openPopup();
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[1.8623573400929134,103.08227523915019],[1.864007700301982,103.08538870896385]]);
+        }).fitBounds([[1.8625902764755482,103.08244915951326],[1.8642406364663409,103.08556262932693]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -133,7 +130,6 @@
             maxNativeZoom: 19
         });
         layer_GoogleSatellite_1;
-        map.addLayer(layer_GoogleSatellite_1);
         function pop_Laboratory_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -141,13 +137,6 @@
                         if (typeof e.target._eventParents[i].resetStyle === 'function') {
                             e.target._eventParents[i].resetStyle(e.target);
                         }
-                    }
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
                     }
                 },
                 mouseover: highlightFeature,
@@ -172,7 +161,7 @@
                         <td>' + (feature.properties['Floor'] !== null ? autolinker.link(String(feature.properties['Floor']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Video/Website Link</th>\
+                        <th scope="row">Lab Description / Equipment Intro</th>\
                         <td>' + (feature.properties['Video'] !== null ? autolinker.link(String(feature.properties['Video']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
@@ -188,7 +177,7 @@
                 case 'First Floor':
                     return {
                 pane: 'pane_Laboratory_2',
-                radius: 9.200000000000001,
+                radius: 9.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -229,7 +218,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,240,0,1.0)',
+                fillColor: 'rgba(31,120,180,1.0)',
                 interactive: true,
             }
                     break;
@@ -266,9 +255,9 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var overlaysTree = [
-            {label: 'Laboratory<br /><table><tr><td style="text-align: center;"><img src="legend/Laboratory_2_FirstFloor0.png" /></td><td>First Floor</td></tr><tr><td style="text-align: center;"><img src="legend/Laboratory_2_GroundFloor1.png" /></td><td>Ground Floor</td></tr><tr><td style="text-align: center;"><img src="legend/Laboratory_2_Other2.png" /></td><td>Other</td></tr></table>', layer: layer_Laboratory_2},
+            {label: 'Laboratory<br /><table><tr><td style="text-align: center;"><img src="legend/Laboratory_2_FirstFloor0.png" /></td><td>First Floor</td></tr><tr><td style="text-align: center;"><img src="legend/Laboratory_2_GroundFloor1.png" /></td><td>Ground Floor</td></tr><tr><td style="text-align: center;"><img src="legend/Laboratory_2_OutSideofFKAABBuidling2.png" /></td><td>Out Side of FKAAB Buidling</td></tr></table>', layer: layer_Laboratory_2},
             {label: "Google Satellite", layer: layer_GoogleSatellite_1},
-            {label: "OpenStreetMap", layer: layer_OpenStreetMap_0},]
+            {label: "OpenStreetMap", layer: layer_OpenStreetMap_0, radioGroup: 'bm' },]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
             //selectorBack: false,
@@ -343,13 +332,6 @@
               addLabel(layer, i);
               i++;
         });
-        map.addControl(new L.Control.Search({
-            layer: layer_Laboratory_2,
-            initial: false,
-            hideMarkerOnCollapse: true,
-            propertyName: 'Lab Name'}));
-        document.getElementsByClassName('search-button')[0].className +=
-         ' fa fa-binoculars';
         resetLabels([layer_Laboratory_2]);
         map.on("zoomend", function(){
             resetLabels([layer_Laboratory_2]);
